@@ -13,8 +13,39 @@ enum DataFetchPhase<T> {
     case failure(Error)
 }
 
+struct FetchTaskToken: Equatable {
+    var category: Category
+    var token: Date
+}
+
+@MainActor
 class ArticleNewsVM: ObservableObject {
     @Published var phase = DataFetchPhase<[ArticleModel]>.empty
+    @Published var fetchTaskToken: FetchTaskToken
     
     private let newsAPI = NewsAPI.shared
+    
+    init(articles: [ArticleModel]? = nil, selectedCathegory: Category = .general) {
+        if let articles = articles {
+            self.phase = .success(articles)
+        } else {
+            self.phase = .empty
+        }
+        self.fetchTaskToken = FetchTaskToken(category: selectedCathegory, token: Date())
+    }
+    
+    func loadArticles() async {
+        phase = .success(ArticleModel.previewData)
+//        if Task.isCancelled { return }
+//        phase = .empty
+//        do {
+//            let articles = try await newsAPI.fetch(from: fetchTaskToken.category)
+//            if Task.isCancelled { return }
+//            phase = .success(articles)
+//        } catch {
+//            if Task.isCancelled { return }
+//            print(error.localizedDescription)
+//            phase = .failure(error)
+//        }
+    }
 }

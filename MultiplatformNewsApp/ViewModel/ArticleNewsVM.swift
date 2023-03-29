@@ -7,7 +7,7 @@
 
 import SwiftUI
 
-enum DataFetchPhase<T> {
+enum DataFetchPhase<T> { // TODO: to another file
     case empty
     case success(T)
     case failure(Error)

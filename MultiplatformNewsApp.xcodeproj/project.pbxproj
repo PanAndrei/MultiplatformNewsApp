@@ -29,6 +29,9 @@
 		B620AF8929D483C100A7E3F3 /* ArticleSearchVM.swift in Sources */ = {isa = PBXBuildFile; fileRef = B620AF8829D483C100A7E3F3 /* ArticleSearchVM.swift */; };
 		B620AF8B29D485A800A7E3F3 /* SearchTabView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B620AF8A29D485A800A7E3F3 /* SearchTabView.swift */; };
 		B620AF8D29D493EF00A7E3F3 /* SearchHistoryListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B620AF8C29D493EF00A7E3F3 /* SearchHistoryListView.swift */; };
+		B620AF8F29D5C31200A7E3F3 /* TabContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B620AF8E29D5C31200A7E3F3 /* TabContentView.swift */; };
+		B620AF9129D5C34500A7E3F3 /* SidebarContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B620AF9029D5C34500A7E3F3 /* SidebarContentView.swift */; };
+		B620AF9329D5C5A900A7E3F3 /* MenuItems.swift in Sources */ = {isa = PBXBuildFile; fileRef = B620AF9229D5C5A900A7E3F3 /* MenuItems.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -56,6 +59,9 @@
 		B620AF8829D483C100A7E3F3 /* ArticleSearchVM.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ArticleSearchVM.swift; sourceTree = "<group>"; };
 		B620AF8A29D485A800A7E3F3 /* SearchTabView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchTabView.swift; sourceTree = "<group>"; };
 		B620AF8C29D493EF00A7E3F3 /* SearchHistoryListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchHistoryListView.swift; sourceTree = "<group>"; };
+		B620AF8E29D5C31200A7E3F3 /* TabContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabContentView.swift; sourceTree = "<group>"; };
+		B620AF9029D5C34500A7E3F3 /* SidebarContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SidebarContentView.swift; sourceTree = "<group>"; };
+		B620AF9229D5C5A900A7E3F3 /* MenuItems.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MenuItems.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -113,8 +119,9 @@
 		B620AF6129D2E45000A7E3F3 /* Models */ = {
 			isa = PBXGroup;
 			children = (
-				B620AF6229D2E46C00A7E3F3 /* ArticleModel.swift */,
 				B620AF7629D3234600A7E3F3 /* CategoryEnum.swift */,
+				B620AF9229D5C5A900A7E3F3 /* MenuItems.swift */,
+				B620AF6229D2E46C00A7E3F3 /* ArticleModel.swift */,
 				B620AF6729D2ED3000A7E3F3 /* ArticleAPIResponse.swift */,
 				B620AF8629D466E200A7E3F3 /* DataStore.swift */,
 			);
@@ -138,6 +145,8 @@
 				B620AF8429D4628800A7E3F3 /* BookmarkTabView.swift */,
 				B620AF8A29D485A800A7E3F3 /* SearchTabView.swift */,
 				B620AF8C29D493EF00A7E3F3 /* SearchHistoryListView.swift */,
+				B620AF8E29D5C31200A7E3F3 /* TabContentView.swift */,
+				B620AF9029D5C34500A7E3F3 /* SidebarContentView.swift */,
 				B620AF8129D4347300A7E3F3 /* Components */,
 			);
 			path = Views;
@@ -251,9 +260,12 @@
 				B620AF8029D4332800A7E3F3 /* RetryView.swift in Sources */,
 				B620AF5629D1F0F200A7E3F3 /* ContentView.swift in Sources */,
 				B620AF6329D2E46C00A7E3F3 /* ArticleModel.swift in Sources */,
+				B620AF9129D5C34500A7E3F3 /* SidebarContentView.swift in Sources */,
 				B620AF8B29D485A800A7E3F3 /* SearchTabView.swift in Sources */,
+				B620AF9329D5C5A900A7E3F3 /* MenuItems.swift in Sources */,
 				B620AF5429D1F0F200A7E3F3 /* MultiplatformNewsAppApp.swift in Sources */,
 				B620AF7A29D32A7E00A7E3F3 /* ArticleNewsVM.swift in Sources */,
+				B620AF8F29D5C31200A7E3F3 /* TabContentView.swift in Sources */,
 				B620AF8329D453A000A7E3F3 /* ArticleBookmarkVM.swift in Sources */,
 				B620AF7C29D32FCA00A7E3F3 /* NewsTabView.swift in Sources */,
 				B620AF7029D30CD300A7E3F3 /* SafariView.swift in Sources */,
@@ -412,7 +424,7 @@
 				SUPPORTS_MAC_DESIGNED_FOR_IPHONE_IPAD = NO;
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = 1;
+				TARGETED_DEVICE_FAMILY = "1,2";
 			};
 			name = Debug;
 		};
@@ -447,7 +459,7 @@
 				SUPPORTS_MAC_DESIGNED_FOR_IPHONE_IPAD = NO;
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = 1;
+				TARGETED_DEVICE_FAMILY = "1,2";
 			};
 			name = Release;
 		};

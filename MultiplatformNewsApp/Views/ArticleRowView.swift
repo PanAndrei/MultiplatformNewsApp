@@ -8,11 +8,22 @@
 import SwiftUI
 
 struct ArticleRowView: View {
+    @Environment(\.horizontalSizeClass) private var horizontalSizeClass
     @EnvironmentObject var artileBookmarksVM: ArticleBookmarkVM
     
     let article: ArticleModel
     
     var body: some View {
+        switch horizontalSizeClass {
+        case .regular:
+            GeometryReader { contentView(proxy: $0) }
+        default:
+            contentView()
+        }
+    }
+    
+    @ViewBuilder
+    private func contentView(proxy: GeometryProxy? = nil) -> some View {
         VStack(alignment: .leading, spacing: 16) {
             AsyncImage(url: article.imageURL) { phase in // todo to cashe image
                 switch phase {
@@ -37,8 +48,8 @@ struct ArticleRowView: View {
                     fatalError()
                 }
             }
-            .frame(minHeight: 200, maxHeight: 300)
-            .background(Color.gray.opacity(0.3))
+            .asynkImageFrame(horizontalSezeClass: horizontalSizeClass ?? .compact)
+            .background(Color.gray.opacity(0.6))
             .clipped()
             
             VStack(alignment: .leading, spacing: 8) {
@@ -49,6 +60,10 @@ struct ArticleRowView: View {
                 Text(article.descriptionText)
                     .font(.headline)
                     .lineLimit(2)
+                
+                if horizontalSizeClass == .regular {
+                    Spacer()
+                }
                 
                 HStack {
                     Text(article.captionText)
@@ -66,7 +81,7 @@ struct ArticleRowView: View {
                     .buttonStyle(.bordered)
                     
                     Button {
-                        presentShareSheet(url: article.articleURL)
+                        presentShareSheet(url: article.articleURL, proxy: proxy)
                     } label: {
                         Image(systemName: "square.and.arrow.up")
                     }
@@ -86,13 +101,32 @@ struct ArticleRowView: View {
     }
 }
 
+extension View {
+    @ViewBuilder
+    func asynkImageFrame(horizontalSezeClass: UserInterfaceSizeClass) -> some View {
+        switch horizontalSezeClass {
+        case .regular:
+            frame(height: 180)
+        default:
+            frame(minHeight: 200, maxHeight: 300)
+        }
+    }
+}
+
 extension View { // todo refactor
-    func presentShareSheet(url: URL) {
+    func presentShareSheet(url: URL, proxy: GeometryProxy? = nil) {
         let activityVC = UIActivityViewController(activityItems: [url], applicationActivities: nil)
-        (UIApplication.shared.connectedScenes.first as? UIWindowScene)?
+        guard let rootVC = (UIApplication.shared.connectedScenes.first as? UIWindowScene)?
             .keyWindow?
-            .rootViewController?
-            .present(activityVC, animated: true)
+            .rootViewController else { return }
+        
+        activityVC.popoverPresentationController?.sourceView = rootVC.view
+        
+        if let proxy = proxy {
+            activityVC.popoverPresentationController?.sourceRect = proxy.frame(in: .global)
+        }
+        
+        rootVC.present(activityVC, animated: true)
     }
 }
 

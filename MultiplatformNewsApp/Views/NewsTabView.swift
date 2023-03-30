@@ -8,23 +8,25 @@
 import SwiftUI
 
 struct NewsTabView: View {
-    @StateObject var articleNewsVM = ArticleNewsVM()
+    @StateObject var articleNewsVM: ArticleNewsVM
+    
+    init(articles: [ArticleModel]? = nil, category: Category = .general) {
+        self._articleNewsVM = StateObject(wrappedValue: ArticleNewsVM(articles: articles, selectedCathegory: category))
+    }
     
     var body: some View {
-        NavigationView {
-            ArticleListView(articles: articles)
-                .overlay(overlayView)
-                .task(id: articleNewsVM.fetchTaskToken, loadTask)
-                .refreshable {
-                    refreshTask()
+        ArticleListView(articles: articles)
+            .overlay(overlayView)
+            .task(id: articleNewsVM.fetchTaskToken, loadTask)
+            .refreshable {
+                refreshTask()
+            }
+            .navigationTitle(articleNewsVM.fetchTaskToken.category.text)
+            .toolbar {
+                ToolbarItem(placement: .navigationBarTrailing) {
+                    menu
                 }
-                .navigationTitle(articleNewsVM.fetchTaskToken.category.text)
-                .toolbar {
-                    ToolbarItem(placement: .navigationBarTrailing) {
-                        menu
-                    }
-                }
-        }
+            }
     }
     
     @ViewBuilder
@@ -79,7 +81,7 @@ struct NewsTabView_Previews: PreviewProvider {
     @StateObject static var articleBookmarksVM = ArticleBookmarkVM.shared
     
     static var previews: some View {
-        NewsTabView(articleNewsVM: ArticleNewsVM(articles: ArticleModel.previewData))
+        NewsTabView(articles: ArticleModel.previewData)
             .environmentObject(articleBookmarksVM)
     }
 }

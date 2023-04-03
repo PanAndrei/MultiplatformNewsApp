@@ -8,27 +8,31 @@
 import SwiftUI
 
 struct TabContentView: View {
+    
+    
     var body: some View {
         TabView {
-            NavigationView {
-                NewsTabView()
+            ForEach(TabMenuItem.allCases) { item in
+                NavigationView {
+                    viewForTabView(item)
+                }
+                .tabItem {
+                    Label(item.text, systemImage: item.systemImage)
+                }
+                .tag(item)
             }
-            .tabItem {
-                Label("News", systemImage: "newspaper")
-            }
-            NavigationView {
-                SearchTabView()
-            }
-            .tabItem {
-                Label("Search", systemImage: "magnifyingglass")
-            }
-            
-            NavigationView {
-                BookmarkTabView()
-            }
-            .tabItem {
-                Label("Saved", systemImage: "bookmark")
-            }
+        }
+    }
+    
+    @ViewBuilder
+    private func viewForTabView(_ item: TabMenuItem) -> some View {
+        switch item {
+        case .news:
+            NewsTabView()
+        case .search:
+            BookmarkTabView()
+        case .saved:
+            SearchTabView()
         }
     }
 }

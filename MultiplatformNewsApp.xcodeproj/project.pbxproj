@@ -32,6 +32,7 @@
 		B620AF8F29D5C31200A7E3F3 /* TabContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B620AF8E29D5C31200A7E3F3 /* TabContentView.swift */; };
 		B620AF9129D5C34500A7E3F3 /* SidebarContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B620AF9029D5C34500A7E3F3 /* SidebarContentView.swift */; };
 		B620AF9329D5C5A900A7E3F3 /* MenuItems.swift in Sources */ = {isa = PBXBuildFile; fileRef = B620AF9229D5C5A900A7E3F3 /* MenuItems.swift */; };
+		B620AF9529DB109A00A7E3F3 /* TabMenuItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = B620AF9429DB109900A7E3F3 /* TabMenuItem.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -62,6 +63,7 @@
 		B620AF8E29D5C31200A7E3F3 /* TabContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabContentView.swift; sourceTree = "<group>"; };
 		B620AF9029D5C34500A7E3F3 /* SidebarContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SidebarContentView.swift; sourceTree = "<group>"; };
 		B620AF9229D5C5A900A7E3F3 /* MenuItems.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MenuItems.swift; sourceTree = "<group>"; };
+		B620AF9429DB109900A7E3F3 /* TabMenuItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabMenuItem.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -124,6 +126,7 @@
 				B620AF6229D2E46C00A7E3F3 /* ArticleModel.swift */,
 				B620AF6729D2ED3000A7E3F3 /* ArticleAPIResponse.swift */,
 				B620AF8629D466E200A7E3F3 /* DataStore.swift */,
+				B620AF9429DB109900A7E3F3 /* TabMenuItem.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -269,6 +272,7 @@
 				B620AF8329D453A000A7E3F3 /* ArticleBookmarkVM.swift in Sources */,
 				B620AF7C29D32FCA00A7E3F3 /* NewsTabView.swift in Sources */,
 				B620AF7029D30CD300A7E3F3 /* SafariView.swift in Sources */,
+				B620AF9529DB109A00A7E3F3 /* TabMenuItem.swift in Sources */,
 				B620AF8929D483C100A7E3F3 /* ArticleSearchVM.swift in Sources */,
 				B620AF7729D3234600A7E3F3 /* CategoryEnum.swift in Sources */,
 				B620AF7529D322A500A7E3F3 /* NewsAPI.swift in Sources */,

@@ -11,12 +11,10 @@ struct SearchTabView: View {
     @StateObject var searvhVM = ArticleSearchVM.shared
     
     var body: some View {
-        //        NavigationView {
         ArticleListView(articles: articles)
             .overlay(overlayView)
             .navigationTitle("Search")
-        //        }
-            .searchable(text: $searvhVM.searchQuery) { suggestionsView }
+            .searchable(text: $searvhVM.searchQuery, placement: .navigationBarDrawer) { suggestionsView }
             .onSubmit(of: .search, search)
             .onChange(of: searvhVM.searchQuery) { newValue in
                 if newValue.isEmpty {

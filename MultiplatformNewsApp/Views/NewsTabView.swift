@@ -8,6 +8,8 @@
 import SwiftUI
 
 struct NewsTabView: View {
+    @Environment(\.horizontalSizeClass) private var horizontalSizeClass
+    
     @StateObject var articleNewsVM: ArticleNewsVM
     
     init(articles: [ArticleModel]? = nil, category: Category = .general) {
@@ -24,7 +26,7 @@ struct NewsTabView: View {
             .navigationTitle(articleNewsVM.fetchTaskToken.category.text)
             .toolbar {
                 ToolbarItem(placement: .navigationBarTrailing) {
-                    menu
+                    navigationBarItem
                 }
             }
     }
@@ -45,25 +47,35 @@ struct NewsTabView: View {
         }
     }
     
+    @ViewBuilder
+    private var navigationBarItem: some View {
+        switch horizontalSizeClass {
+        case .regular:
+            Button {
+                refreshTask()
+            } label: {
+                Image(systemName: "arrow.clockwise")
+            }
+        default:
+            Menu {
+                Picker("Category", selection: $articleNewsVM.fetchTaskToken.category) {
+                    ForEach(Category.allCases) {
+                        Text($0.text)
+                            .tag($0)
+                    }
+                }
+            } label: {
+                Image(systemName: "fiberchannel")
+                    .imageScale(.large)
+            }
+        }
+    }
+    
     private var articles: [ArticleModel] {
         if case let .success(articles) = articleNewsVM.phase {
             return articles
         } else {
             return []
-        }
-    }
-    
-    private var menu: some View {
-        Menu {
-            Picker("Category", selection: $articleNewsVM.fetchTaskToken.category) {
-                ForEach(Category.allCases) {
-                    Text($0.text)
-                        .tag($0)
-                }
-            }
-        } label: {
-            Image(systemName: "fiberchannel")
-                .imageScale(.large)
         }
     }
     

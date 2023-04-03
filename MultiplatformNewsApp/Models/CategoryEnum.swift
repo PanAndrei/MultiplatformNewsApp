@@ -8,13 +8,13 @@
 import Foundation
 
 enum Category: String, CaseIterable {
-    case general
-    case business
-    case technology
-    case entertainment
-    case sports
-    case science
-    case health
+case general
+case business
+case technology
+case entertainment
+case sports
+case science
+case health
     
     var text: String  {
         if self == .general {

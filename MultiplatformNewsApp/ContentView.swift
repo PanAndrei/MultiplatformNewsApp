@@ -9,7 +9,7 @@ import SwiftUI
 
 struct ContentView: View {
     @Environment(\.horizontalSizeClass) private var horizontalSizeClass
-    
+    @AppStorage("item_selection") var selectionItemID: MenuItems.ID?
     var body: some View {
         switch horizontalSizeClass {
         case .regular:

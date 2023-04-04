@@ -8,8 +8,9 @@
 import SwiftUI
 
 struct NewsTabView: View {
+#if os(iOS)
     @Environment(\.horizontalSizeClass) private var horizontalSizeClass
-    
+#endif
     @StateObject var articleNewsVM: ArticleNewsVM
     
     init(articles: [ArticleModel]? = nil, category: Category = .general) {
@@ -24,11 +25,13 @@ struct NewsTabView: View {
                 refreshTask()
             }
             .navigationTitle(articleNewsVM.fetchTaskToken.category.text)
+#if os(iOS)
             .toolbar {
                 ToolbarItem(placement: .navigationBarTrailing) {
                     navigationBarItem
                 }
             }
+#endif
     }
     
     @ViewBuilder
@@ -47,6 +50,7 @@ struct NewsTabView: View {
         }
     }
     
+#if os(iOS)
     @ViewBuilder
     private var navigationBarItem: some View {
         switch horizontalSizeClass {
@@ -70,6 +74,7 @@ struct NewsTabView: View {
             }
         }
     }
+#endif
     
     private var articles: [ArticleModel] {
         if case let .success(articles) = articleNewsVM.phase {

@@ -8,10 +8,27 @@
 import SwiftUI
 
 struct TabContentView: View {
+    @Binding var selectionItemID: MenuItems.ID?
     
+    private var selection: Binding<TabMenuItem> {
+        Binding {
+            TabMenuItem(menuItem: selectionItemID)
+        } set: { newValue in
+            selectionItemID = newValue.menuItemId(category: selectedCategory ?? .general)
+        }
+    }
+    
+    private var selectedCategory: Category? {
+        let menuItem = MenuItems(id: selectionItemID)
+        if case .categiry(let category) = menuItem {
+            return category
+        } else {
+            return nil
+        }
+    }
     
     var body: some View {
-        TabView {
+        TabView(selection: selection) {
             ForEach(TabMenuItem.allCases) { item in
                 NavigationView {
                     viewForTabView(item)
@@ -28,7 +45,7 @@ struct TabContentView: View {
     private func viewForTabView(_ item: TabMenuItem) -> some View {
         switch item {
         case .news:
-            NewsTabView()
+            NewsTabView(category: selectedCategory ?? .general)
         case .search:
             BookmarkTabView()
         case .saved:
@@ -39,6 +56,6 @@ struct TabContentView: View {
 
 struct TabContentView_Previews: PreviewProvider {
     static var previews: some View {
-        TabContentView()
+        TabContentView(selectionItemID: .constant(nil))
     }
 }

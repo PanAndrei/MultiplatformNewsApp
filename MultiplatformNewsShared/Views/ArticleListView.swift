@@ -8,34 +8,44 @@
 import SwiftUI
 
 struct ArticleListView: View {
+#if os(iOS)
     @Environment(\.horizontalSizeClass) private var horizontalSizeClass
     @State private var selectedArticle: ArticleModel?
+#endif
+    
     let articles: [ArticleModel]
     
     var body: some View {
         rootView
-        .sheet(item: $selectedArticle) {
-            SafariView(url: $0.articleURL)
-                .edgesIgnoringSafeArea(.bottom)
-        }
+#if os(iOS)
+            .sheet(item: $selectedArticle) {
+                SafariView(url: $0.articleURL)
+                    .edgesIgnoringSafeArea(.bottom)
+            }
+#endif
     }
     
     @ViewBuilder
     private var rootView: some View {
+#if os(iOS)
         switch horizontalSizeClass {
         case .regular:
             gridView
         default:
             listView
         }
+#elseif os(macOS)
+        gridView
+#endif
     }
     
+#if os(iOS)
     private var listView: some View {
         List {
             ForEach(articles) { article in
                 ArticleRowView(article: article)
                     .onTapGesture {
-                      selectedArticle = article
+                        selectedArticle = article
                     }
             }
             .listRowInsets(.init(top: 0, leading: 0, bottom: 0, trailing: 0))
@@ -43,6 +53,7 @@ struct ArticleListView: View {
         }
         .listStyle(.plain)
     }
+#endif
     
     private var gridView: some View {
         ScrollView {
@@ -50,10 +61,12 @@ struct ArticleListView: View {
                 ForEach(articles) { article in
                     ArticleRowView(article: article)
                         .onTapGesture {
-                          selectedArticle = article
+
                         }
                         .frame(height: 360)
+#if os(iOS)
                         .background(Color(uiColor: .systemBackground))
+#endif
                         .mask(RoundedRectangle(cornerRadius: 8))
                         .shadow(radius: 4)
                         .padding(.bottom, 4)
@@ -61,13 +74,24 @@ struct ArticleListView: View {
             }
             .padding()
         }
+#if os(iOS)
         .background(Color(uiColor: .secondarySystemBackground))
+#endif
+
+    }
+    
+    private func handleOnTapGesture(article: ArticleModel) {
+#if os(iOS)
+        selectedArticle = article
+#elseif os(macOS)
+        NSWorkspace.shared.open(article.articleURL)
+#endif
     }
 }
 
 struct ArticleListView_Previews: PreviewProvider {
     @StateObject static var articleBookmarksVM = ArticleBookmarkVM.shared
-
+    
     static var previews: some View {
         NavigationView {
             ArticleListView(articles: ArticleModel.previewData)

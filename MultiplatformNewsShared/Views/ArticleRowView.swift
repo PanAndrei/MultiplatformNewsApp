@@ -8,18 +8,24 @@
 import SwiftUI
 
 struct ArticleRowView: View {
+#if os(iOS)
     @Environment(\.horizontalSizeClass) private var horizontalSizeClass
+#endif
     @EnvironmentObject var artileBookmarksVM: ArticleBookmarkVM
     
     let article: ArticleModel
     
     var body: some View {
+#if os(iOS)
         switch horizontalSizeClass {
         case .regular:
             GeometryReader { contentView(proxy: $0) }
         default:
             contentView()
         }
+#elseif os(macOS)
+        GeometryReader { contentView(proxy: $0) }
+#endif
     }
     
     @ViewBuilder
@@ -48,7 +54,11 @@ struct ArticleRowView: View {
                     fatalError()
                 }
             }
+#if os(iOS)
             .asynkImageFrame(horizontalSezeClass: horizontalSizeClass ?? .compact)
+#elseif os(macOS)
+            .frame(height: 180)
+#endif
             .background(Color.gray.opacity(0.6))
             .clipped()
             
@@ -61,9 +71,11 @@ struct ArticleRowView: View {
                     .font(.headline)
                     .lineLimit(2)
                 
+#if os(iOS)
                 if horizontalSizeClass == .regular {
                     Spacer()
                 }
+#endif
                 
                 HStack {
                     Text(article.captionText)
@@ -101,6 +113,7 @@ struct ArticleRowView: View {
     }
 }
 
+#if os(iOS)
 extension View {
     @ViewBuilder
     func asynkImageFrame(horizontalSezeClass: UserInterfaceSizeClass) -> some View {
@@ -112,9 +125,11 @@ extension View {
         }
     }
 }
+#endif
 
 extension View { // todo refactor
     func presentShareSheet(url: URL, proxy: GeometryProxy? = nil) {
+#if os(iOS)
         let activityVC = UIActivityViewController(activityItems: [url], applicationActivities: nil)
         guard let rootVC = (UIApplication.shared.connectedScenes.first as? UIWindowScene)?
             .keyWindow?
@@ -127,6 +142,7 @@ extension View { // todo refactor
         }
         
         rootVC.present(activityVC, animated: true)
+#endif
     }
 }
 

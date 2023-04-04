@@ -8,8 +8,8 @@
 import SwiftUI
 
 struct SidebarContentView: View {
-//    @AppStorage("item_selection") var selectionItemID: MenuItems.ID?
     @Binding var selectionItemID: MenuItems.ID?
+    
     private var selection: Binding<MenuItems.ID?> {
         Binding {
             selectionItemID ?? MenuItems.categiry(.general).id

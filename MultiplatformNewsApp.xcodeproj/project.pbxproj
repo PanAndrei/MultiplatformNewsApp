@@ -53,6 +53,7 @@
 		B620AFBF29DC63EA00A7E3F3 /* ArticleListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B620AF6D29D30B2200A7E3F3 /* ArticleListView.swift */; };
 		B620AFC029DC63EA00A7E3F3 /* NewsTabView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B620AF7B29D32FCA00A7E3F3 /* NewsTabView.swift */; };
 		B620AFC129DC63EA00A7E3F3 /* RetryView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B620AF7F29D4332800A7E3F3 /* RetryView.swift */; };
+		B620AFC229DC892400A7E3F3 /* BookmarkTabView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B620AF8429D4628800A7E3F3 /* BookmarkTabView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -164,7 +165,6 @@
 		B620AF6929D2F64C00A7E3F3 /* Views */ = {
 			isa = PBXGroup;
 			children = (
-				B620AF8429D4628800A7E3F3 /* BookmarkTabView.swift */,
 				B620AF8A29D485A800A7E3F3 /* SearchTabView.swift */,
 				B620AF8C29D493EF00A7E3F3 /* SearchHistoryListView.swift */,
 				B620AF8E29D5C31200A7E3F3 /* TabContentView.swift */,
@@ -268,6 +268,7 @@
 				B620AF6A29D2F6A300A7E3F3 /* ArticleRowView.swift */,
 				B620AF6D29D30B2200A7E3F3 /* ArticleListView.swift */,
 				B620AF7B29D32FCA00A7E3F3 /* NewsTabView.swift */,
+				B620AF8429D4628800A7E3F3 /* BookmarkTabView.swift */,
 				B620AF7F29D4332800A7E3F3 /* RetryView.swift */,
 				B620AF7D29D342C000A7E3F3 /* EmotyPlaceholderView.swift */,
 			);
@@ -420,6 +421,7 @@
 				B620AFC029DC63EA00A7E3F3 /* NewsTabView.swift in Sources */,
 				B620AFB729DC49B100A7E3F3 /* MenuItems.swift in Sources */,
 				B620AFBB29DC4EAA00A7E3F3 /* SidebarListView.swift in Sources */,
+				B620AFC229DC892400A7E3F3 /* BookmarkTabView.swift in Sources */,
 				B620AFB429DC49B100A7E3F3 /* NewsAPI.swift in Sources */,
 				B620AFB629DC49B100A7E3F3 /* ArticleBookmarkVM.swift in Sources */,
 				B620AFC129DC63EA00A7E3F3 /* RetryView.swift in Sources */,

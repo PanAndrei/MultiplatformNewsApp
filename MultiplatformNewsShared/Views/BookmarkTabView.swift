@@ -15,11 +15,12 @@ struct BookmarkTabView: View {
     var body: some View {
         let articles = self.articles // TODO: calculate in vm
         
-        //        NavigationView {
         ArticleListView(articles: articles)
             .overlay(overlayView(isEmpty: articles.isEmpty))
             .navigationTitle("Saved articles")
-        //        }
+#if os(macOS)
+            .navigationSubtitle("\(articles.count) bookmark(s)")
+#endif
             .searchable(text: $searchText)
     }
     

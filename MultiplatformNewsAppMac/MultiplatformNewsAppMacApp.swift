@@ -9,9 +9,12 @@ import SwiftUI
 
 @main
 struct MultiplatformNewsAppMacApp: App {
+    @StateObject var articleBookmarkVM = ArticleBookmarkVM.shared
+    
     var body: some Scene {
         WindowGroup {
             ContentView()
+                .environmentObject(articleBookmarkVM)
         }
         .commands {
             SidebarCommands()

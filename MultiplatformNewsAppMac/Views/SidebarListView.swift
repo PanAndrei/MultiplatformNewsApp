@@ -46,9 +46,10 @@ struct SidebarListView: View {
         case .search:
             Text("search")
         case .saved:
-            Text("saved")
+            BookmarkTabView()
         case .categiry(let category):
             NewsTabView(category: category)
+                .id(category.id)
         }
     }
     

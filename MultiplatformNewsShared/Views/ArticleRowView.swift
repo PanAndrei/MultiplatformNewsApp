@@ -54,7 +54,7 @@ struct ArticleRowView: View {
                     fatalError()
                 }
             }
-#if os(iOS)
+#if os(iOS) // todo refactor to functions
             .asynkImageFrame(horizontalSezeClass: horizontalSizeClass ?? .compact)
 #elseif os(macOS)
             .frame(height: 180)
@@ -62,19 +62,36 @@ struct ArticleRowView: View {
             .background(Color.gray.opacity(0.6))
             .clipped()
             
-            VStack(alignment: .leading, spacing: 8) {
+            VStack(alignment: .leading, spacing: 0) {
                 Text(article.title)
+                    .padding(.bottom, 8)
+#if os(iOS)
                     .font(.headline)
+#elseif os(macOS)
+                    .font(.title2.bold())
+                    .foregroundStyle(.primary)
+#endif
                     .lineLimit(3)
                 
                 Text(article.descriptionText)
-                    .font(.headline)
+#if os(iOS)
+                    .font(.subheadline)
                     .lineLimit(2)
+#elseif os(macOS)
+                    .font(.body)
+                    .foregroundStyle(.secondary)
+                    .lineSpacing(2)
+                    .lineLimit(3)
+#endif
                 
 #if os(iOS)
                 if horizontalSizeClass == .regular {
                     Spacer()
                 }
+#elseif os(macOS)
+                Spacer()
+                Divider()
+                    .padding(.bottom, 12)
 #endif
                 
                 HStack {
@@ -90,18 +107,28 @@ struct ArticleRowView: View {
                     } label: {
                         Image(systemName: artileBookmarksVM.isBookmark(for: article) ? "bookmark.fill" : "bookmark")
                     }
-                    .buttonStyle(.bordered)
                     
-                    Button {
-                        presentShareSheet(url: article.articleURL, proxy: proxy)
-                    } label: {
-                        Image(systemName: "square.and.arrow.up")
-                    }
-                    .buttonStyle(.bordered)
+#if os(iOS)
+                    shareButon(proxy: proxy)
+#elseif os(macOS)
+                    GeometryReader { shareButon(proxy: $0) }
+                        .frame(width: 16, height: 16)
+#endif
+                    
                 }
+#if os(iOS)
+                .buttonStyle(.bordered)
+#elseif os(macOS)
+                .buttonStyle(.borderless)
+                .imageScale(.large)
+#endif
+                
             }
             .padding([.horizontal, .bottom])
         }
+#if os(macOS)
+        .contextMenu(ContextMenu { contexMenu })
+#endif
     }
     
     private func toggleBookmark(for article: ArticleModel) {
@@ -111,6 +138,40 @@ struct ArticleRowView: View {
             artileBookmarksVM.addBookmark(for: article)
         }
     }
+    
+    private func shareButon(proxy: GeometryProxy?) -> some View {
+        Button {
+            presentShareSheet(url: article.articleURL, proxy: proxy)
+        } label: {
+            Image(systemName: "square.and.arrow.up")
+        }
+    }
+    
+#if os(macOS)
+    @ViewBuilder
+    private var contexMenu: some View {
+        Button {
+            NSWorkspace.shared.open(article.articleURL)
+        } label: {
+            Text("Open in browser")
+        }
+        
+        Button {
+            let url = article.articleURL as NSPasteboardWriting
+            let pasteboard = NSPasteboard.general
+            pasteboard.clearContents()
+            pasteboard.writeObjects([url])
+        } label: {
+            Text("Copy URL")
+        }
+
+        Button {
+            toggleBookmark(for: article)
+        } label: {
+            artileBookmarksVM.isBookmark(for: article) ? Text("Remove bookmark") : Text("Bookmark")
+        }
+    }
+#endif
 }
 
 #if os(iOS)
@@ -142,13 +203,22 @@ extension View { // todo refactor
         }
         
         rootVC.present(activityVC, animated: true)
+#elseif os(macOS)
+        guard let contentView = NSApp.keyWindow?.contentView,
+              let proxy = proxy else {
+            return
+        }
+        
+        let frame = proxy.frame(in: .global)
+        let sharedServicePicker = NSSharingServicePicker(items: [url])
+        sharedServicePicker.show(relativeTo: frame, of: contentView, preferredEdge: .minY)
 #endif
     }
 }
 
 struct ArticleRowView_Previews: PreviewProvider {
     @StateObject static var articleBookmarksVM = ArticleBookmarkVM.shared
-
+    
     static var previews: some View {
         NavigationView {
             List {

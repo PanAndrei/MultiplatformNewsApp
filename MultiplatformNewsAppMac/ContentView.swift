@@ -35,6 +35,22 @@ struct ContentView: View {
                 }
         }
         .frame(minWidth: 1000, minHeight: 390)
+        .focusable()
+        .touchBar {
+            ScrollView(.horizontal) {
+                HStack {
+                    ForEach([MenuItems.saved] + Category.menuItems) { item in
+                        Button {
+                            selection.wrappedValue = item.id
+                        } label: {
+                            Label(item.text, systemImage: item.systemImage)
+                        }
+                    }
+                }
+            }
+            .frame(width: 684)
+            .touchBarItemPresence(.required("menus"))
+        }
     }
     
     private func toggleSidebar() {

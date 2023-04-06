@@ -31,6 +31,19 @@ struct NewsTabView: View {
                     navigationBarItem
                 }
             }
+#elseif os(macOS)
+            .navigationSubtitle(articleNewsVM.lastREfreshedDateTExt)
+            .focusedSceneValue(\.refershAction, refreshTask)
+            .toolbar {
+                ToolbarItem(placement: .automatic) {
+                    Button {
+                        refreshTask()
+                    } label: {
+                        Image(systemName: "arrow.clockwise")
+                            .imageScale(.large)
+                    }
+                }
+            }
 #endif
     }
     

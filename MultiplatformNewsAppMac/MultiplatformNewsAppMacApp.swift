@@ -18,6 +18,7 @@ struct MultiplatformNewsAppMacApp: App {
         }
         .commands {
             SidebarCommands()
+            NewsCommands()
         }
     }
 }

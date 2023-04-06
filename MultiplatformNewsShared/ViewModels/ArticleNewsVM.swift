@@ -18,6 +18,8 @@ struct FetchTaskToken: Equatable {
     var token: Date
 }
 
+fileprivate let dateFormatter = DateFormatter()
+
 @MainActor
 class ArticleNewsVM: ObservableObject {
     @Published var phase = DataFetchPhase<[ArticleModel]>.empty
@@ -32,6 +34,11 @@ class ArticleNewsVM: ObservableObject {
     @AppStorage("item_selection") private var selectionItemID: MenuItems.ID?
     
     private let newsAPI = NewsAPI.shared
+    
+    var lastREfreshedDateTExt: String {
+        dateFormatter.timeStyle = .short
+        return "Last refresh at: \(dateFormatter.string(from: fetchTaskToken.token))"
+    }
     
     init(articles: [ArticleModel]? = nil, selectedCathegory: Category = .general) {
         if let articles = articles {

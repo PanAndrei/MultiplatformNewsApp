@@ -54,6 +54,8 @@
 		B620AFC029DC63EA00A7E3F3 /* NewsTabView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B620AF7B29D32FCA00A7E3F3 /* NewsTabView.swift */; };
 		B620AFC129DC63EA00A7E3F3 /* RetryView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B620AF7F29D4332800A7E3F3 /* RetryView.swift */; };
 		B620AFC229DC892400A7E3F3 /* BookmarkTabView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B620AF8429D4628800A7E3F3 /* BookmarkTabView.swift */; };
+		B620AFC429DF147700A7E3F3 /* FocusedValue+RefreshAction.swift in Sources */ = {isa = PBXBuildFile; fileRef = B620AFC329DF147700A7E3F3 /* FocusedValue+RefreshAction.swift */; };
+		B620AFC629DF1F2B00A7E3F3 /* NewsCommands.swift in Sources */ = {isa = PBXBuildFile; fileRef = B620AFC529DF1F2B00A7E3F3 /* NewsCommands.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -93,6 +95,8 @@
 		B620AFA529DC463000A7E3F3 /* MultiplatformNewsAppMac.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = MultiplatformNewsAppMac.entitlements; sourceTree = "<group>"; };
 		B620AFA929DC482A00A7E3F3 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
 		B620AFBA29DC4EAA00A7E3F3 /* SidebarListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SidebarListView.swift; sourceTree = "<group>"; };
+		B620AFC329DF147700A7E3F3 /* FocusedValue+RefreshAction.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "FocusedValue+RefreshAction.swift"; sourceTree = "<group>"; };
+		B620AFC529DF1F2B00A7E3F3 /* NewsCommands.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewsCommands.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -188,6 +192,8 @@
 				B620AFA929DC482A00A7E3F3 /* Info.plist */,
 				B620AF9C29DC462E00A7E3F3 /* MultiplatformNewsAppMacApp.swift */,
 				B620AF9E29DC462E00A7E3F3 /* ContentView.swift */,
+				B620AFC329DF147700A7E3F3 /* FocusedValue+RefreshAction.swift */,
+				B620AFC529DF1F2B00A7E3F3 /* NewsCommands.swift */,
 				B620AFB929DC4E7800A7E3F3 /* Views */,
 				B620AFA029DC463000A7E3F3 /* Assets.xcassets */,
 				B620AFA529DC463000A7E3F3 /* MultiplatformNewsAppMac.entitlements */,
@@ -415,10 +421,12 @@
 				B620AFB029DC49B100A7E3F3 /* ArticleSearchVM.swift in Sources */,
 				B620AF9D29DC462E00A7E3F3 /* MultiplatformNewsAppMacApp.swift in Sources */,
 				B620AFBD29DC63EA00A7E3F3 /* EmotyPlaceholderView.swift in Sources */,
+				B620AFC629DF1F2B00A7E3F3 /* NewsCommands.swift in Sources */,
 				B620AFAF29DC49B100A7E3F3 /* ArticleNewsVM.swift in Sources */,
 				B620AFBE29DC63EA00A7E3F3 /* ArticleRowView.swift in Sources */,
 				B620AFB329DC49B100A7E3F3 /* CategoryEnum.swift in Sources */,
 				B620AFC029DC63EA00A7E3F3 /* NewsTabView.swift in Sources */,
+				B620AFC429DF147700A7E3F3 /* FocusedValue+RefreshAction.swift in Sources */,
 				B620AFB729DC49B100A7E3F3 /* MenuItems.swift in Sources */,
 				B620AFBB29DC4EAA00A7E3F3 /* SidebarListView.swift in Sources */,
 				B620AFC229DC892400A7E3F3 /* BookmarkTabView.swift in Sources */,
